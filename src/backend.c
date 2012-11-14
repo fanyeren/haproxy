@@ -218,10 +218,44 @@ struct server *get_server_ph(struct proxy *px, const char *uri, int uri_len)
 					p++;
 				}
                 hash = hash & 0x7FFFFFFF;
-				if (px->lbprm.algo & BE_LB_LKUP_CHTREE)
-					return chash_get_server_hash(px, hash);
-				else
-					return map_get_server_hash(px, hash);
+				if (px->lbprm.algo & BE_LB_LKUP_CHTREE) {
+
+                    FILE *tmp_ha;
+
+                    tmp_ha = fopen("/tmp/tmp_ha", "a+");
+
+					struct server *srv;
+                    srv =  chash_get_server_hash(px, hash);
+
+                    fprintf(tmp_ha, "============================================\n");
+                    fprintf(tmp_ha, "url: %s\n", uri);
+                    fprintf(tmp_ha, "hash: %d\n", hash);
+                    fprintf(tmp_ha, "from: %u\n", srv->addr.sin_addr.s_addr);
+                    fprintf(tmp_ha, "to: %u\n", srv->source_addr.sin_addr.s_addr);
+                    fclose(tmp_ha);
+
+                    return srv;
+
+                }
+				else {
+
+                    FILE *tmp_ha;
+
+                    tmp_ha = fopen("/tmp/tmp_ha", "a+");
+
+                    struct server *srv;
+                    srv = map_get_server_hash(px, hash);
+
+                    fprintf(tmp_ha, "============================================\n");
+                    fprintf(tmp_ha, "url: %s\n", uri);
+                    fprintf(tmp_ha, "hash: %d\n", hash);
+                    fprintf(tmp_ha, "from: %u\n", srv->addr.sin_addr.s_addr);
+                    fprintf(tmp_ha, "to: %u\n", srv->source_addr.sin_addr.s_addr);
+                    fclose(tmp_ha);
+
+
+                    return srv;
+                }
 			}
 		}
 		/* skip to next parameter */
