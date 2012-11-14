@@ -256,7 +256,8 @@ struct server *map_get_server_rr(struct proxy *px, struct server *srvtoavoid)
  * be recomputed if required before being looked up. If any server is found, it
  * will be returned.  If no valid server is found, NULL is returned.
  */
-struct server *map_get_server_hash(struct proxy *px, unsigned int hash)
+//struct server *map_get_server_hash(struct proxy *px, unsigned int hash)
+struct server *map_get_server_hash(struct proxy *px, int hash)
 {
 	if (px->lbprm.tot_weight == 0)
 		return NULL;
@@ -264,6 +265,7 @@ struct server *map_get_server_hash(struct proxy *px, unsigned int hash)
 	if (px->lbprm.map.state & LB_MAP_RECALC)
 		recalc_server_map(px);
 
+    hash = hash & 0x7FFFFFFF;
 	return px->lbprm.map.srv[hash % px->lbprm.tot_weight];
 }
 

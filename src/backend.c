@@ -182,7 +182,8 @@ struct server *get_server_uh(struct proxy *px, char *uri, int uri_len)
  */
 struct server *get_server_ph(struct proxy *px, const char *uri, int uri_len)
 {
-	unsigned long hash = 0;
+	int hash = 0;
+	//unsigned long hash = 0;
 	const char *p;
 	const char *params;
 	int plen;
