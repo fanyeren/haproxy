@@ -265,7 +265,7 @@ struct server *map_get_server_hash(struct proxy *px, int hash)
 	if (px->lbprm.map.state & LB_MAP_RECALC)
 		recalc_server_map(px);
 
-    hash = hash & 0x7FFFFFFF;
+    //hash = hash & 0x7FFFFFFF;
 	return px->lbprm.map.srv[hash % px->lbprm.tot_weight];
 }
 

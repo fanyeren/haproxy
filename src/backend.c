@@ -217,6 +217,7 @@ struct server *get_server_ph(struct proxy *px, const char *uri, int uri_len)
 					uri_len--;
 					p++;
 				}
+                hash = hash & 0x7FFFFFFF;
 				if (px->lbprm.algo & BE_LB_LKUP_CHTREE)
 					return chash_get_server_hash(px, hash);
 				else
