@@ -230,9 +230,11 @@ struct server *get_server_ph(struct proxy *px, const char *uri, int uri_len)
                     fprintf(tmp_ha, "============================================\n");
                     fprintf(tmp_ha, "url: %s\n", uri);
                     fprintf(tmp_ha, "hash: %d\n", hash);
-                    fprintf(tmp_ha, "from: %u\n", srv->addr.sin_addr.s_addr);
-                    fprintf(tmp_ha, "to: %u\n", srv->source_addr.sin_addr.s_addr);
+                    fprintf(tmp_ha, "from: %d\n", srv->addr.sin_addr.s_addr);
+                    fprintf(tmp_ha, "to: %d\n", srv->source_addr.sin_addr.s_addr);
+                    fprintf(tmp_ha, "upstream: %d\n", hash % px->lbprm.tot_weight);
                     fclose(tmp_ha);
+
 
                     return srv;
 
@@ -249,8 +251,9 @@ struct server *get_server_ph(struct proxy *px, const char *uri, int uri_len)
                     fprintf(tmp_ha, "============================================\n");
                     fprintf(tmp_ha, "url: %s\n", uri);
                     fprintf(tmp_ha, "hash: %d\n", hash);
-                    fprintf(tmp_ha, "from: %u\n", srv->addr.sin_addr.s_addr);
-                    fprintf(tmp_ha, "to: %u\n", srv->source_addr.sin_addr.s_addr);
+                    fprintf(tmp_ha, "from: %d\n", srv->addr.sin_addr.s_addr);
+                    fprintf(tmp_ha, "to: %d\n", srv->source_addr.sin_addr.s_addr);
+                    fprintf(tmp_ha, "upstream: %d\n", hash % px->lbprm.tot_weight);
                     fclose(tmp_ha);
 
 
