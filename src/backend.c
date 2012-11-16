@@ -220,20 +220,20 @@ struct server *get_server_ph(struct proxy *px, const char *uri, int uri_len)
                 hash = hash & 0x7FFFFFFF;
 				if (px->lbprm.algo & BE_LB_LKUP_CHTREE) {
 
-                    FILE *tmp_ha;
-
-                    tmp_ha = fopen("/tmp/tmp_ha", "a+");
-
+//                    FILE *tmp_ha;
+//
+//                    tmp_ha = fopen("/tmp/tmp_ha", "a+");
+//
 					struct server *srv;
                     srv =  chash_get_server_hash(px, hash);
 
-                    fprintf(tmp_ha, "============================================\n");
-                    fprintf(tmp_ha, "url: %s\n", uri);
-                    fprintf(tmp_ha, "hash: %d\n", hash);
-                    fprintf(tmp_ha, "from: %d\n", srv->addr.sin_addr.s_addr);
-                    fprintf(tmp_ha, "to: %d\n", srv->source_addr.sin_addr.s_addr);
-                    fprintf(tmp_ha, "upstream: %d\n", hash % px->lbprm.tot_weight);
-                    fclose(tmp_ha);
+//                    fprintf(tmp_ha, "============================================\n");
+//                    fprintf(tmp_ha, "url: %s\n", uri);
+//                    fprintf(tmp_ha, "hash: %d\n", hash);
+//                    fprintf(tmp_ha, "from: %d\n", srv->addr.sin_addr.s_addr);
+//                    fprintf(tmp_ha, "to: %d\n", srv->source_addr.sin_addr.s_addr);
+//                    fprintf(tmp_ha, "upstream: %d\n", hash % px->lbprm.tot_weight);
+//                    fclose(tmp_ha);
 
 
                     return srv;
@@ -241,20 +241,20 @@ struct server *get_server_ph(struct proxy *px, const char *uri, int uri_len)
                 }
 				else {
 
-                    FILE *tmp_ha;
-
-                    tmp_ha = fopen("/tmp/tmp_ha", "a+");
-
+//                    FILE *tmp_ha;
+//
+//                    tmp_ha = fopen("/tmp/tmp_ha", "a+");
+//
                     struct server *srv;
                     srv = map_get_server_hash(px, hash);
 
-                    fprintf(tmp_ha, "============================================\n");
-                    fprintf(tmp_ha, "url: %s\n", uri);
-                    fprintf(tmp_ha, "hash: %d\n", hash);
-                    fprintf(tmp_ha, "from: %d\n", srv->addr.sin_addr.s_addr);
-                    fprintf(tmp_ha, "to: %d\n", srv->source_addr.sin_addr.s_addr);
-                    fprintf(tmp_ha, "upstream: %d\n", hash % px->lbprm.tot_weight);
-                    fclose(tmp_ha);
+//                    fprintf(tmp_ha, "============================================\n");
+//                    fprintf(tmp_ha, "url: %s\n", uri);
+//                    fprintf(tmp_ha, "hash: %d\n", hash);
+//                    fprintf(tmp_ha, "from: %d\n", srv->addr.sin_addr.s_addr);
+//                    fprintf(tmp_ha, "to: %d\n", srv->source_addr.sin_addr.s_addr);
+//                    fprintf(tmp_ha, "upstream: %d\n", hash % px->lbprm.tot_weight);
+//                    fclose(tmp_ha);
 
 
                     return srv;
